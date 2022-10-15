@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { DatabaseController } from './database/DatabaseController';
 import api from './routes';
 import cors from "cors";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -10,6 +11,7 @@ const app: Express = express();
 const port = process.env.PORT;
 app.use(cors())
 app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).send('Express + TypeScript Server');
