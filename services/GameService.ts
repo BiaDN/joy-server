@@ -59,7 +59,7 @@ export default class GameService {
     console.log({ idCharacter });
     if (!character) throw new Error("No character found");
     const listItem = await Items.find({ character: character._id });
-    if (!listItem[0]) throw new Error("No listItem found");
+    // if (!listItem[0]) throw new Error("No listItem found");
     return { data: listItem };
   }
 
