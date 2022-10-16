@@ -44,6 +44,13 @@ export default class GameController {
         return res.status(StatusCodes.OK).json(handleSuccess(character))
     }
 
+    async editNameCharacter(req: any, res: any) {
+        const { idCharacter, newName } = req.body
+        const [err, character] = await to(gameService.editNameCharacter(idCharacter, newName))
+        if (err) return res.status(StatusCodes.BAD_REQUEST).json(handleError(err))
+        return res.status(StatusCodes.OK).json(handleSuccess(character))
+    }
+
     async getAllItemsCharacter(req: any, res: any) {
         const { idCharacter } = req.query
         const [err, character] = await to(gameService.getAllItemsCharacter(idCharacter))

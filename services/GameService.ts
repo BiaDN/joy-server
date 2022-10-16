@@ -63,6 +63,18 @@ export default class GameService {
     return { data: listItem };
   }
 
+  async editNameCharacter(idCharacter: string, newName: string): Promise<any> {
+    const character: any = await Characters.findOne({ _id: idCharacter });
+    console.log({ idCharacter });
+    if (!character) throw new Error("No character found");
+    const newCharacter = await Characters.findOneAndUpdate(
+      { _id: idCharacter },
+      { name: newName },
+      { new: true }
+    );
+    return { data: newCharacter };
+  }
+
   async getAllCharacterUser(idUser: string): Promise<any> {
     const user: any = await Users.findOne({ _id: idUser });
     if (!user) throw new Error("No user found");
