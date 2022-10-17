@@ -4,7 +4,7 @@ import { Items } from "../models/Items";
 import { Users } from "../models/User";
 
 export default class GameService {
-  async getListCharacter() {}
+  async getListCharacter() { }
 
   async createPlayer(name: string, avatar: string): Promise<any> {
     const user = await Users.create({ name, avatar });
@@ -82,6 +82,27 @@ export default class GameService {
     const listCharacter = await Characters.find({ user: user._id });
     if (!listCharacter[0]) throw new Error("No listItem found");
     return { data: listCharacter };
+  }
+
+  async getInfoCharacter(idCharacter: string): Promise<any> {
+    const query = [
+      {
+        $match: {
+          _id: new Types.ObjectId(idCharacter)
+        }
+      },
+      {
+        $lookup: {
+          from: "items",
+          localField: "_id",
+          foreignField: "character",
+          as: "itemsCharacter"
+        }
+      }
+    ]
+
+    const infoCharacter = await Characters.aggregate(query);
+    return { data: infoCharacter };
   }
 
   async getInfoUser(idUser: string): Promise<any> {

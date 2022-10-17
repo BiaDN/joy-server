@@ -12,6 +12,8 @@ gameRouter.post("/editNameCharacter",gameController.editNameCharacter);
 gameRouter.get("/getAllItemsCharacter",gameController.getAllItemsCharacter);
 gameRouter.get("/getAllCharacterUser",gameController.getAllCharacterUser);
 gameRouter.get("/getInfoUser",gameController.getInfoUser);
+gameRouter.get("/getInfoCharacter",gameController.getInfoCharacter);
+
 
 
 

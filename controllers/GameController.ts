@@ -71,4 +71,11 @@ export default class GameController {
         if (err) return res.status(StatusCodes.BAD_REQUEST).json(handleError(err))
         return res.status(StatusCodes.OK).json(handleSuccess(character))
     }
+
+    async getInfoCharacter(req: any, res: any) {
+        const { idCharacter } = req.query
+        const [err, character] = await to(gameService.getInfoCharacter(idCharacter))
+        if (err) return res.status(StatusCodes.BAD_REQUEST).json(handleError(err))
+        return res.status(StatusCodes.OK).json(handleSuccess(character))
+    }
 }
